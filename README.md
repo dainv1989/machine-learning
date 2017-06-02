@@ -1,2 +1,3 @@
-# machine-learning
-machine learning study
+## machine learning study
+
+Start date: 25/05/2017
