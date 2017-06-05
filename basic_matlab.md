@@ -4,6 +4,20 @@ whos                        % show all variables with size of current session
 who                         % show al variable names only
 clear                       % delete all variables
 
+## plot graph
+x=[0:10];
+y=x;
+z=2.*x;
+subplot(1,2,1);
+plot(x,y);
+subplot(1,2,2);
+plot(x,z);
+axis([0 10 0 10]);
+xlabel('x');
+ylabel('y');
+title('my plot');
+legend('sin', 'cos');
+
 ## matrix operations
 A = [1 2; 3 4]              % khai báo ma trận 2x2
 X'                          % matrix transpose
