@@ -20,3 +20,18 @@ A4: (e^x)' = e^x
 
 Q5: Trong neural network thì số lượng phần tử của hidden layer thứ j (Sj) là do mình tùy chọn đúng ko?  
 A5:  
+
+Q6: Tại sao neural network lại dùng logistic function (sigmoid/activation function) mà không dùng linear regresstion function?   
+Bài toán regresstion và bài toán classification nếu sử dụng neural network thì đều dùng logistic function cho từng node đúng ko?   
+A6:  
+
+Q7: Bao nhiêu layer là đủ đối với 1 neural network? Hay nói cách khác làm sao thế xác định được số lượng layer cần thiết cho một mô hình?  
+A7:  
+
+Q8: Mỗi lần học thì neural network sẽ thay đổi các hệ số để phù hợp với các input khác nhau đúng ko?  
+A8:  
+
+Q9: Trong regression và classification sử dụng cost function để đánh giá quá trình học. Trong neural network thì tiêu chuẩn đánh giá quá trình trình học của từng hidden node là gì?  
+Hay khi nào thì dừng quá trình tính hệ số theta cho từng node trong network?  
+A9:  
+
