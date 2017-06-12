@@ -9,10 +9,14 @@ A1:
 
 Q2: Tìm lambda trước hay tìm theta trước?  
 Theo như video "Regularized Linear Regression" thì sau khi thêm hệ số lambda vào công thức rồi mới tìm theta.  
-A2: 
+A2: Tìm theta trước  
 
 Q3: Chọn giá trị lambda (regulation parameter) như thế nào? (tiêu chuẩn, phương pháp chọn)  
-A3:  
+A3: Giống với chọn alpha, thử các giá trị khác nhau  
 
 Q4: Giải thích công thức đạo hàm J function của logistic regression sang gradient descent?  
-A4:  
+A4: (e^x)' = e^x  
+Đạo hàm của hàm e^x bằng chính nó.  
+
+Q5: Trong neural network thì số lượng phần tử của hidden layer thứ j (Sj) là do mình tùy chọn đúng ko?  
+A5:  
