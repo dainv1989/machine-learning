@@ -89,8 +89,8 @@ for label=1:num_labels
 end
 
 % remove the 1st column of each theta
-Theta1_t = Theta1(:, 2:size(Theta1, 2));
-Theta2_t = Theta2(:, 2:size(Theta2, 2));
+Theta1_t = Theta1(:, 2:end);
+Theta2_t = Theta2(:, 2:end);
 % unrolled theta without 1st row
 theta = [Theta1_t(:); Theta2_t(:)];
 
