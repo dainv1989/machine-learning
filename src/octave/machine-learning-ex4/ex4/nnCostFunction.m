@@ -100,7 +100,27 @@ reg = theta' * theta;
 J = J + reg * lambda / (2 * m);
 
 % -------------------------------------------------------------
+% a3 = hx;
+% a2 = a;
+% delta3 = delta_hx
+% delta2 = delta_a
+for label=1:num_labels
+    y_t = (y == label);
 
+    delta_hx(:, label) = (hx(:, label) - y_t);
+end
+
+% size(Theta2_t) = 10x25
+% size(delta_hx) = 5000x10
+% size(a2)       = 5000x25
+a2 = a(2:size(a,2), :);
+delta_a = (delta_hx * Theta2_t) .* sigmoidGradient(a2);
+
+delta = 0;
+X = X(2:size(X,2), :);
+% size(delta_a) = 5000x25;
+% size(X)       = 5000x1;
+delta = delta + X' * delta_a;
 % =========================================================================
 
 % Unroll gradients
