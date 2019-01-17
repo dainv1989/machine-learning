@@ -32,31 +32,17 @@ X = [ones(m, 1) X];
 
 % Input:
 % X         : m x (n+1)
-% all_theta : m x (n+1)
+% all_theta : num_labels x (n+1)
 % Output:
 % p         : m x 1
 % Middle:
-% predict   : m x m ( X * all_theta' )
+% predict   : m x num_labels ( X * all_theta' )
 predict = sigmoid(X * all_theta');
 
 % get maximum of each row
-% example
-% input [1 4; 3 5]
-% output will be [4; 5]
-p = max(predict, [], 2);
+[val, idx] = max(predict, [], 2);
+p = idx;
 
-% get logical array of predict matrix 
-% where maximum element of row is 1, 
-% others are 0
-% example output [0 1; 0 1]
-predict = (predict == p);
-
-% labels = [1; 2; 3; ...; 10];
-labels = [1:num_labels]';
-
-% output
-p = predict * labels;
 % =========================================================================
-
 
 end

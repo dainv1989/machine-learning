@@ -37,10 +37,7 @@ p_t = a * Theta2';
 p_t = sigmoid(p_t);
 
 % convert p_t to logical array
-p_max = max(p_t, [], 2);
-p_t = (p_t == p_max);
+[val, p] = max(p_t, [], 2);
 
-labels = [1:num_labels]';
-p = p_t * labels;
 % ============================================================
 end
