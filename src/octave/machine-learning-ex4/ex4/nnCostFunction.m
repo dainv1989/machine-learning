@@ -62,69 +62,82 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
-% -------------------------------------------------------------
-% add ones to X data matrix
-% size(X) = 5000x400
-X = [ones(m,1) X];
+labels = (1:num_labels);
 
-% calculate activation (hidden layer)
-% size(Theta1) = 25x401
-% size(a)      = 5000x25
-a = sigmoid(X * Theta1');
+% Part 1: Feedforward
+%------------------------------------------------
+X = [ones(m, 1) X];
 
-% add ones to activation matrix of hidden layer
+% X: [5000x401], Theta1: [25x401], a: [5000x25]
+a = X * Theta1';
+a = sigmoid(a);
+
+% a: [5000x26], Theta2: [10x26], hx: [5000x10]
 a = [ones(size(a, 1), 1) a];
-
-% hypothesis output
-% size(Theta2) = 10x26
-% size(hx)     = 5000 x 10
 hx = sigmoid(a * Theta2');
 
-for label=1:num_labels
-    % convert y to logic array for each label
+for label = 1:num_labels
     y_t = (y == label);
 
-    % calculate cost for each label and add to overall cost
-    J = J - (y_t' * log(hx(:, label)) + (1 - y_t)' * log(1 - hx(:, label))) / m;
+    J = J - (y_t' * log(hx(:, label)) + (1 - y_t') * log(1 - hx(:, label))) / m;
 end
 
-% remove the 1st column of each theta
 Theta1_t = Theta1(:, 2:end);
 Theta2_t = Theta2(:, 2:end);
-% unrolled theta without 1st row
 theta = [Theta1_t(:); Theta2_t(:)];
-
-% regularization computation
 reg = theta' * theta;
 
 J = J + reg * lambda / (2 * m);
 
+% Part 2: Backpropagation
 % -------------------------------------------------------------
-% a3 = hx;
-% a2 = a;
-% delta3 = delta_hx
-% delta2 = delta_a
-for label=1:num_labels
-    y_t = (y == label);
+% y_s = [1 2 3 4 5 6 7 8 9 10];
+y_s = (1:num_labels);
 
-    delta_hx(:, label) = (hx(:, label) - y_t);
+for t = 1:m
+    % step 1
+    % a_1: [1x401], a_2: [1x26], a_3: [1x10]
+    a_1 = X(t, :);
+    a_2 = sigmoid(a_1 * Theta1');
+    a_2 = [ones(size(a_2, 1), 1) a_2];
+    a_3 = sigmoid(a_2 * Theta2');
+
+    % step 2
+    % delta_3: [1x10]
+    y_t = (y(t) == y_s);
+    delta_3 = a_3 - y_t;
+
+    % step 3
+    % dgz_2: [1x25], Theta2_t: [10x25], delta_2: [1x25]
+    dgz_2 = a_2 .* (1 - a_2);
+    dgz_2 = dgz_2(2:end);
+    delta_2 = (delta_3 * Theta2_t) .* dgz_2;
+
+    % step 4
+    Theta1_grad = Theta1_grad + delta_2' * a_1;
+    Theta2_grad = Theta2_grad + delta_3' * a_2;
 end
-
-% size(Theta2_t) = 10x25
-% size(delta_hx) = 5000x10
-% size(a2)       = 5000x25
-a2 = a(2:size(a,2), :);
-delta_a = (delta_hx * Theta2_t) .* sigmoidGradient(a2);
-
-delta = 0;
-X = X(2:size(X,2), :);
-% size(delta_a) = 5000x25;
-% size(X)       = 5000x1;
-delta = delta + X' * delta_a;
-% =========================================================================
 
 % Unroll gradients
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
 
+% step 5
+grad = grad / m;
+
+% Part 3: Regularization
+% -------------------------------------------------------------
+Theta1_reg = Theta1;
+Theta2_reg = Theta2;
+
+Theta1_reg(:, 1) = 0;
+Theta2_reg(:, 1) = 0;
+
+% unroll regularized params
+Theta_reg = [Theta1_reg(:); Theta2_reg(:)];
+
+% Regularized gradient
+grad = grad + Theta_reg * lambda / m;
+
+% =========================================================================
 
 end
