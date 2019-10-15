@@ -39,6 +39,7 @@ error_val = zeros(length(lambda_vec), 1);
 %
 %
 
+% TODO: This solution is still NOT passed yet
 for i = 1:length(lambda_vec)
     lambda = lambda_vec(i);
     theta = trainLinearReg(X, y, lambda);
