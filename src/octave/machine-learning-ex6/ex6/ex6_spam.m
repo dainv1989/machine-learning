@@ -71,7 +71,12 @@ fprintf('\nTraining Linear SVM (Spam Classification)\n')
 fprintf('(this may take 1 to 2 minutes) ...\n')
 
 C = 0.1;
-model = svmTrain(X, y, C, @linearKernel);
+% model = svmTrain(X, y, C, @linearKernel);
+
+% apply gaussianKernel instead of linearKernel function
+% test accuracy is much lower than (88% in compared to 98%)
+sigma = 1;
+model = svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma));
 
 p = svmPredict(model, X);
 
