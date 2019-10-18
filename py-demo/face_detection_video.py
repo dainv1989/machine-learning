@@ -13,7 +13,7 @@ else:
 cascPath = "haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
 
-if (videoFile != "")
+if videoFile != "":
     inVideo = cv2.VideoCapture(videoFile)
 else:
     # 0 is camera index
@@ -22,7 +22,7 @@ else:
 
 # define video writer
 outFile = "outputVideo.avi"
-resolution = (640, 480)
+resolution = (640, 360)
 fps =  25.0
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
 outVideo = cv2.VideoWriter(outFile, fourcc, fps, resolution)
@@ -36,9 +36,9 @@ while True:
         gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = faceCascade.detectMultiScale(
             gray_frame,
-            scaleFactor = 1.05,
+            scaleFactor = 1.1,
             minNeighbors = 5,
-            minSize = (20, 20),
+            minSize = (30, 30),
             flags = cv2.CASCADE_SCALE_IMAGE
         )
 
@@ -46,17 +46,15 @@ while True:
         for (x, y, w, h) in faces:
             cv2.rectangle(frame, (x, y), (x+w, y+h), (234, 67, 53), 2)
 
-        cv2.imshow("Capturing video", frame)
+        cv2.imshow("Face detecting", frame)
 
-        # set True to save the video
-        if False:
-            frame = cv2.flip(frame, 0)
-            outVideo.write(frame)
+        # save output video
+        frame = cv2.flip(frame, 0)
+        outVideo.write(frame)
 
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
     else:
-        break
-
-    if cv2.waitKey(1)
         break
 
 # release resource
