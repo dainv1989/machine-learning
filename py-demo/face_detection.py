@@ -1,3 +1,6 @@
+# references:
+#   https://realpython.com/face-recognition-with-python/
+#
 import sys
 import cv2
 
@@ -15,15 +18,18 @@ imgray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 cascPath = "haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
 
+# NOTE:
+# each set of parameter values work best for individual image
 faces = faceCascade.detectMultiScale(
     imgray,
-    scaleFactor=1.1,
+    scaleFactor=1.05,
     minNeighbors=5,
-    minSize=(30,30),
+    minSize=(20,20),                    # increase this size cause less detected faces
     flags=cv2.CASCADE_SCALE_IMAGE
 )
 
 # draw retangles around found faces
+# color codes are BGR instead of RGB
 print("found {0} faces".format(len(faces)))
 for (x, y, w, h) in faces:
     cv2.rectangle(image, (x, y), (x+w, y+h), (234, 67, 53), 2)
@@ -31,3 +37,8 @@ for (x, y, w, h) in faces:
 # show result image
 cv2.imshow("faces found", image)
 cv2.waitKey(0)
+
+imgOutput = "output.jpg"
+cv2.imwrite(imgOutput, image)
+
+cv2.destroyAllWindows()
