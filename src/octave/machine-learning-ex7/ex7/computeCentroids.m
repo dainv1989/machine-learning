@@ -26,13 +26,16 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
+for i = 1:K
+    % element equals i will be 1
+    % otherwise 0
+    idx_i = (idx == i);
 
-
-
-
-
-
-
+    centroids(i, :) = sum (X.*idx_i);
+    if (sum(idx_i) != 0)
+        centroids(i, :) = centroids(i, :) / sum (idx_i);
+    end
+end
 % =============================================================
 
 

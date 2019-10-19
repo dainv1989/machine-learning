@@ -21,12 +21,28 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+m = size(X, 1);
 
+for i = 1:m
+    X_i = X(i, :);
 
+    % distance to the 1st centroid
+    tmp = X_i - centroids(1, :);
+    min_distance = tmp * tmp';
+    idx(i) = 1;
 
-
-
-
+    % calculate distance from X(i) to every centroids
+    % and get index of the closest one
+    for j = 2:K
+        tmp = X_i - centroids(j, :);
+        distance = tmp * tmp';
+        % store the mininum distance centroid index
+        if (distance < min_distance)
+            idx(i) = j;
+            min_distance = distance;
+        end
+    end
+end
 % =============================================================
 
 end
