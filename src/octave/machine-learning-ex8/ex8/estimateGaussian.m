@@ -21,16 +21,16 @@ sigma2 = zeros(n, 1);
 %               should contain variance of the i-th feature.
 %
 
+mu = sum(X, 1) / m;
+X_sub = X - mu;
 
+% loop through all columns of X
+for j = 1:n
+    x_j = X_sub(:, j);
+    sigma2(j) = (x_j' * x_j) / m;
+end
 
-
-
-
-
-
-
-
+mu = mu';
 % =============================================================
-
 
 end
