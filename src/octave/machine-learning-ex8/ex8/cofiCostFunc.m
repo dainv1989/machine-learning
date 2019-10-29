@@ -40,20 +40,24 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
+% size(Y) = [num_movies, num_users]
+% size(X) = [num_movies, num_features]
+% size(Theta) = [num_users, num_features]
 
+error = (X * Theta' - Y);
+error2 = error .^ 2;
+J = sum(sum(error2 .* R)) / 2;
 
+J_reg = sum(sum(Theta .^ 2)) + sum(sum(X .^ 2));
+J_reg = J_reg * lambda / 2;
 
+J = J + J_reg;
 
+% gradient
+error_R = error .* R;
 
-
-
-
-
-
-
-
-
-
+X_grad = error_R * Theta + lambda * X;
+Theta_grad = error_R' * X + lambda * Theta;
 
 % =============================================================
 
