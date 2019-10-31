@@ -24,8 +24,8 @@ else:
 outFile = "outputVideo.avi"
 resolution = (640, 360)
 fps =  25.0
-fourcc = cv2.VideoWriter_fourcc(*'XVID')
-outVideo = cv2.VideoWriter(outFile, fourcc, fps, resolution)
+#fourcc = cv2.VideoWriter_fourcc(*'XVID')
+#outVideo = cv2.VideoWriter(outFile, fourcc, fps, resolution)
 
 while True:
     # capture frame by frame
@@ -36,9 +36,9 @@ while True:
         gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = faceCascade.detectMultiScale(
             gray_frame,
-            scaleFactor = 1.1,
-            minNeighbors = 5,
-            minSize = (30, 30),
+            scaleFactor = 1.05,
+            minNeighbors = 2,
+            minSize = (20, 20),
             flags = cv2.CASCADE_SCALE_IMAGE
         )
 
@@ -49,8 +49,8 @@ while True:
         cv2.imshow("Face detecting", frame)
 
         # save output video
-        frame = cv2.flip(frame, 0)
-        outVideo.write(frame)
+        #frame = cv2.flip(frame, 0)
+        #outVideo.write(frame)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
@@ -59,5 +59,5 @@ while True:
 
 # release resource
 inVideo.release()
-outVideo.release()
+#outVideo.release()
 cv2.destroyAllWindows()
