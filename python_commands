@@ -1,6 +1,9 @@
- sudo apt install python3-pip
+sudo apt install python3-pip
 
- python3.7 -m pip install --upgrade pip --user
- python3.7 -m pip install pandas --user
+python3.7 -m pip install --upgrade pip --user
+python3.7 -m pip install pandas --user
 
- pip3 install opencv-python
+pip3 install opencv-python
+
+# install numpy package version smaller than v1.17
+pip3 install "numpy<1.17"
