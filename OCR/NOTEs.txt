@@ -1,0 +1,17 @@
+NOTES while investigating:
+
+1. How to evaluate OCR model?
+Text matching evaluation: SequenceMatcher from difflib
+    Measure similitary of output text with different input
+    Original image  --> text1
+    Noise image     --> text2
+    Grayscale image --> text3
+
+2. How to add noise to image to multiply training set?
+3. How to build OCA model from scratch?
+4. OCA frameworks/libraries:
+- tesseract
+- 
+
+5. Open dataset to evaluate:
+
